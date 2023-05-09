@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,17 +6,7 @@ import './App.css'
 function App() {  
   const [row, setRow] = useState([]);
 
-  //  main.jsx 에서 StrictMode 지우고 콘솔로그 확인해보기
-  useEffect(() => {
-    console.log('mount or update')    // 맨처음 mount, fetch 후 setRow 실행될 때 update. 총 2번 실행됨.
-
-    return () => {
-        console.log('unmount')      // unmount 될 때. 정확히는 내용이 지워질 때
-    }
-  })
-  useEffect(() => {
-    console.log('mount only')      // mount 될 때만 실행됨. 
-    // mount될 때만 fetch 하고싶으니까
+  if( row.length === 0 ) {
     fetch("http://openAPI.seoul.go.kr:8088/78636e4e496269673634556a795559/json/RealtimeCityAir/1/25/").then(
       function(res2) {
         res2.json().then(function(res3) {
@@ -24,13 +14,7 @@ function App() {
         })
       }
     )
-  }, [])
-  useEffect(() => {
-    console.log('update only')  // 'row'가 update 될 때만 실행됨. row 자리에 배열형식으로 여러 개 넣을 수 있음
-  }, [row])
-
-
-
+  }
 
   
   console.log(row);
@@ -59,16 +43,13 @@ function App() {
         </thead>
         <tbody>
           {
-          row.map((gu, index) => {
-            return (
-                <tr key={ index }>
-                <td>{gu.MSRSTE_NM}</td>
-                <td>{gu.PM10}</td>
-                <td>{gu.O3}</td>
-                <td>{gu.IDEX_NM}</td>
-                </tr>
-            )
-
+          row.map(function(obj) {
+            return <tr>
+              <td>{obj.MSRSTE_NM}</td>
+              <td>{obj.PM10}</td>
+              <td>{obj.O3}</td>
+              <td>{obj.IDEX_NM}</td>
+              </tr>
           })
           }
         </tbody>
