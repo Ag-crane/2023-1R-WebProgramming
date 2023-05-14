@@ -11,7 +11,7 @@ function App() {
     console.log('mount or update')    // 맨처음 mount, fetch 후 setRow 실행될 때 update. 총 2번 실행됨.
 
     return () => {
-        console.log('unmount')      // unmount 될 때. 정확히는 내용이 지워질 때
+        console.log('unmount')      // unmount 될 때. 정확히는 내용이 지워질 때 (지웠다가 다시 업데이트 하기 위해 지우는 과정)
     }
   })
   useEffect(() => {
@@ -20,11 +20,12 @@ function App() {
     fetch("http://openAPI.seoul.go.kr:8088/78636e4e496269673634556a795559/json/RealtimeCityAir/1/25/").then(
       function(res2) {
         res2.json().then(function(res3) {
-          setRow(res3.RealtimeCityAir.row);
+          setRow(res3.RealtimeCityAir.row); 
         })
       }
     )
-  }, [])
+  }, []) // 뒤에 빈 배열을 넣으면 mount 될 때만 실행됨.
+
   useEffect(() => {
     console.log('update only')  // 'row'가 update 될 때만 실행됨. row 자리에 배열형식으로 여러 개 넣을 수 있음
   }, [row])
@@ -52,20 +53,25 @@ function App() {
       <h1>Vite + Resort</h1>
       <table>
         <thead>
+          <tr>
           <th>이름</th>
           <th>PM10</th>
           <th>O3</th>
           <th>상태</th>
+          </tr> 
         </thead>
         <tbody>
+        // 중괄호 : 자바스크립트 코드를 넣겠다는 뜻
+        // function 의 중괄호   는 return 을 의미.
+        // 소괄호 : 원래 아무 의미 없는데, jsx 문법은 엔터를 치면 깨지거나 뭔가 문제가 생기기 때문에 return 뒤를 ()로 묶어줌 
           {
           row.map((gu, index) => {
             return (
                 <tr key={ index }>
-                <td>{obj.MSRSTE_NM}</td>
-                <td>{obj.PM10}</td>
-                <td>{obj.O3}</td>
-                <td>{obj.IDEX_NM}</td>
+                <td>{gu.MSRSTE_NM}</td>
+                <td>{gu.PM10}</td>
+                <td>{gu.O3}</td>
+                <td>{gu.IDEX_NM}</td>
                 </tr>
             )
 
