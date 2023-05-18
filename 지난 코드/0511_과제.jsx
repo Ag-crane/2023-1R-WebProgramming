@@ -39,32 +39,8 @@ function Worldcup() {
   const [game, setGame] = useState([]);
   const [round, setRound] = useState(0);
   const [nextGame, setNextGame] = useState([]);
-  const [ stat, setStat ] = useState({
-    "넬": 0,
-    "노브레인": 0,
-    "더폴스": 0,
-    "데이브레이크": 0,
-    "데이식스": 0,
-    "라쿠나": 0,
-    "로맨틱펀치": 0,
-    "루시": 0,
-    "새소년": 0,
-    "설": 0,
-    "실리카겔": 0,
-    "쏜애플": 0,
-    "웨투얼": 0,
-    "유다빈밴드": 0,
-    "잔나비": 0,
-    "터치드": 0
-  });
 
-  // 처음 Worldcup 컴포넌트가 단 한 번 실행하는 함수
   useEffect(() => {
-    const 문자열 = localStorage.getItem("월드컵")
-    if (문자열 != null){
-      setStat( JSON.parse(문자열) )
-    }
-
     setGame(
       candidate
         .map((c) => {
@@ -85,39 +61,16 @@ function Worldcup() {
   }, [round]);
 
   if (game.length === 1) {
-    localStorage.setItem("월드컵",JSON.stringify(stat)) // 딕셔너리를 문자열로
     return (
       <div>
         <p>인디밴드 월드컵 우승</p>
-        <img src={game[0].src} /> <p>{game[0].name}</p> <p>{ stat[game[0].name] }번 승리</p>
-        <table>
-          {Object.keys(stat).map(name => {
-            return <tr key={name}><td>{name}</td><td>{stat[name]}</td></tr>
-          })}
-        </table>
+        <img src={game[0].src} /> <p>{game[0].name}</p>
       </div>
     );
   }
   if (game.length === 0 || round + 1 > game.length / 2)
     return <p>로딩중입니다</p>;
-  const left = round*2, right=round*2 +1;
 
-  const leftFunction = () => {
-    setStat({
-      ...stat,
-      [game[left].name]: stat[ game[left].name +1]
-    })
-    setNextGame((prev) => prev.concat(left));
-    setRound((round) => round + 1);
-  }
-  const rightFunction = () => {
-    setStat({
-      ...stat,
-      [game[right].name]: stat[ game[right].name +1]
-    })
-    setNextGame((prev) => prev.concat(right));
-    setRound((round) => round + 1);
-  }
   return (
     <div>
       <p
@@ -135,7 +88,10 @@ function Worldcup() {
           width="500px"
           height="auto"
           src={game[round * 2].src}
-          onClick={leftFunction}
+          onClick={() => {
+            setNextGame((prev) => prev.concat(game[round * 2]));
+            setRound((round) => round + 1);
+          }}
         />
       </div>
       <p style={{ fontSize: "30px", fontWeight: "bold", margin: "0 20px" }}>
@@ -146,7 +102,10 @@ function Worldcup() {
           width="500px"
           height="auto"
           src={game[round * 2 + 1].src}
-          onClick={rightFunction}
+          onClick={() => {
+            setNextGame((prev) => prev.concat(game[round * 2 + 1]));
+            setRound((round) => round + 1);
+          }}
         />
       </div>
     </div>
