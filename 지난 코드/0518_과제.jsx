@@ -111,19 +111,12 @@ function Worldcup() {
     console.log(stat);
 
     const leftFunction = () => {
-      
-      document.querySelector("#imgBox > div:first-child").classList.add("slidein");
-      console.log(document.querySelector("#imgBox > div:first-child").classList);
-      document.querySelector("#imgBox > div:last-child").classList.add("slideout");
-      setTimeout(() => {
-        setStat({
+      setStat({
           ...stat, 
           [game[left].name]: stat[ game[left].name ] + 1
-        });
-        setNextGame((prev) => prev.concat(game[left]))
-        setRound(round => round + 1);
-      }, 3000);
-
+      });
+      setNextGame((prev) => prev.concat(game[left]))
+      setRound(round => round + 1);
     };
     const rightFunction = () => {
         setStat({
@@ -136,24 +129,10 @@ function Worldcup() {
     
     return (
       <div className="container">
-        <p id="title">이상형 월드컵 {round + 1} / {game.length / 2} <b>{game.length === 2 ? "결승" : game.length + "강"}</b></p>
+        <p>이상형 월드컵 {round + 1} / {game.length / 2} <b>{game.length === 2 ? "결승" : game.length + "강"}</b></p>
         <div id="imgBox">
-          <div>
-            <div>
-              <img src={game[left].src} onClick={leftFunction}/>
-            </div>
-            <div className="textBox">
-              <p>{game[left].name}</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <img src={game[right].src} onClick={rightFunction}/>
-            </div>
-            <div className="textBox">
-              <p>{game[right].name}</p>
-            </div>
-          </div>
+            <img src={game[left].src} onClick={leftFunction}/>
+            <img src={game[right].src} onClick={rightFunction}/>
         </div>
     </div>
     )

@@ -1,19 +1,19 @@
-import p01 from "./assets/band/넬.jpg";
-import p02 from "./assets/band/노브레인.jpg";
-import p03 from "./assets/band/더폴스.jpg";
-import p04 from "./assets/band/데이브레이크.jpg";
-import p05 from "./assets/band/데이식스.jpg";
-import p06 from "./assets/band/라쿠나.jpg";
-import p07 from "./assets/band/로맨틱펀치.jpg";
-import p08 from "./assets/band/루시.jpg";
-import p09 from "./assets/band/새소년.jpg";
-import p10 from "./assets/band/설.jpg";
-import p11 from "./assets/band/실리카겔.jpg";
-import p12 from "./assets/band/쏜애플.jpg";
-import p13 from "./assets/band/웨투얼.jpg";
-import p14 from "./assets/band/유다빈밴드.jpg";
-import p15 from "./assets/band/잔나비.jpg";
-import p16 from "./assets/band/터치드.jpg";
+import p01 from "../assets/band/넬.jpg";
+import p02 from "../assets/band/노브레인.jpg";
+import p03 from "../assets/band/더폴스.jpg";
+import p04 from "../assets/band/데이브레이크.jpg";
+import p05 from "../assets/band/데이식스.jpg";
+import p06 from "../assets/band/라쿠나.jpg";
+import p07 from "../assets/band/로맨틱펀치.jpg";
+import p08 from "../assets/band/루시.jpg";
+import p09 from "../assets/band/새소년.jpg";
+import p10 from "../assets/band/설.jpg";
+import p11 from "../assets/band/실리카겔.jpg";
+import p12 from "../assets/band/쏜애플.jpg";
+import p13 from "../assets/band/웨투얼.jpg";
+import p14 from "../assets/band/유다빈밴드.jpg";
+import p15 from "../assets/band/잔나비.jpg";
+import p16 from "../assets/band/터치드.jpg";
 import { useEffect, useState } from "react";
 
 

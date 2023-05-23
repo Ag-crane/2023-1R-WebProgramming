@@ -61,6 +61,7 @@ function Worldcup() {
 
     // 처음 Worldcup 컴포넌트가 단 한 번 실행하는 함수
     useEffect(() => {
+        // localStorage는 항상 문자열 형식으로 저장하고 불러와야 한다
         const 문자열 = localStorage.getItem("월드컵");
         if( 문자열 != null ) {
             setStat( JSON.parse(문자열) );
@@ -82,6 +83,7 @@ function Worldcup() {
     }, [round]);
 
     if( game.length === 1 ){
+        // localStorage는 항상 문자열 형식으로 저장하고 불러와야 한다
         localStorage.setItem("월드컵", JSON.stringify( stat ) );
         return <div>
             <p>이상형 월드컵 우승</p>
